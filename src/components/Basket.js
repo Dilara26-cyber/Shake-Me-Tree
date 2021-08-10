@@ -2,18 +2,13 @@ import React from "react";
 import basket from "../images/basket.svg";
 import styled from "styled-components";
 import Apple from "./Apple";
-const BasketImg = styled.img`
-  position: absolute;
-  bottom: -52vh;
-  left: -225px;
-  width: 300px;
-  
-`;
+//STYLING
+//I USED STYLED COMPONENTS BECAUSE OF PROPS USAGE. NTH-CHILD PSEUDO-ELEMENT USES PROPS TO DECIDE WHICH ELEMENT TO ANIMATE.
 const Wrapper = styled.div`
   position: absolute;
-  width: 300px;
-  left: -225px;
-  bottom: -35vh;
+  width: 275px;
+  left: -250px;
+  bottom: -30vh;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -29,12 +24,18 @@ const Wrapper = styled.div`
     z-index: -1;
   }
 `;
-const Basket = ({ applesWrapper, apple, number }) => {
+const BasketImg = styled.img`
+  position: absolute;
+  bottom: -45vh;
+  left: -250px;
+  width: 275px;
+`;
+const Basket = ({ number }) => {
   return (
     <>
       <BasketImg src={basket} alt="basket" />
       <Wrapper number={number}>
-        <Apple/>
+        <Apple />
       </Wrapper>
     </>
   );

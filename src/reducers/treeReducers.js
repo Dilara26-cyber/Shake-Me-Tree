@@ -1,10 +1,11 @@
 import { GENERATE_RANDOM_NUMBER } from "../types";
 
+const random =  Math.floor(Math.random() * 10 + 1);
+
 const initialState = {
-  isShaken: false,
   applesOnTheTree: 50,
   randomNumber: Math.floor(Math.random() * 10 + 1),
-  droppedApples: [],
+  droppedApples: [random],
 };
 
 export const randomNum = (state = initialState, action) => {
@@ -13,7 +14,6 @@ export const randomNum = (state = initialState, action) => {
       return {
         ...state,
         randomNumber: Math.floor(Math.random() * 10 + 1),
-        isShaken: true,
         droppedApples: state.droppedApples !== [] && [...state.droppedApples, state.randomNumber],
         sumNumber: state.droppedApples.length > 0 && state.droppedApples.reduce((sum, number) => sum + number)
       };

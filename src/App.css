@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+
 *,
 *::before,
 *::after {
@@ -8,8 +10,24 @@
 
 body {
   background-color: #f3f3f3;
+  font-family: 'Poppins', sans-serif;
 }
-
+button{
+  font-family: "Poppins", sans-serif;
+  letter-spacing: 1px;
+  border: none;
+  cursor: pointer;
+  padding: 1em 2em;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+.restart{
+  border-radius: 0 30px 30px 0;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+.restart:hover{
+  background-color: #181818;
+  color: #f3f3f3;
+}
 img {
   width: 100%;
 }
@@ -32,6 +50,18 @@ img {
 .tree img {
   width: 90%;
   height: 100%;
+}
+.apple {
+  width: 30px;
+  height: 30px;
+}
+
+.hide{
+  opacity: 0;
+}
+.show{
+  opacity: 1;
+  transition: opacity 1s ease-in 4s;
 }
 
 @keyframes shake {
@@ -69,8 +99,4 @@ img {
   to {
     transform: translate3d(0, 200px, 0) rotate3d(0, 0, 0, 0deg);
   }
-}
-.apple {
-  width: 30px;
-  height: 30px;
 }

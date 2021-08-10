@@ -1,19 +1,18 @@
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Basket from "./Basket";
 import Apple from "./Apple";
 
-//STYLES
+//STYLING
 const Wrapper = styled.div`
-  width: 90%;
-  margin: 0 auto;
   position: absolute;
-  max-width: 400px;
-  top: 35%;
-  left: 50%;
+  width: 400px;
+  top: 38%;
+  left: 48%;
   transform: translate(-50%, -50%);
 `;
-//USED STYLED COMPONENTS BECAUSE OF PROPS USAGE. NTH-CHILD PSEUDO-ELEMENT USES PROPS TO DECIDE WHICH ELEMENT TO ANIMATE.
+//I USED STYLED COMPONENTS BECAUSE OF PROPS USAGE. NTH-CHILD PSEUDO-ELEMENT USES PROPS TO DECIDE WHICH ELEMENT TO ANIMATE.
 const AppleContainer = styled.div`
   display: flex;
   gap: 0.5em;
@@ -34,19 +33,38 @@ const AppleContainer = styled.div`
 `;
 
 const Apples = ({ isShaken }) => {
+  const [isThereAnyApplesLeft, setIsThereAnyApplesLeft] = useState(true);
+  
   //Get state from Redux Store
-  const numberOfApples = useSelector((state) => state.storeState.sumNumber);
+  const numberOfApplesFalling = useSelector(
+    (state) => state.storeState.sumNumber
+  );
+
+  //Original Number of Apples on Tree
+  const applesOnTheTree = useSelector(
+    (state) => state.storeState.applesOnTheTree
+  );
+
+  //Check and decide if there is still apples on the tree.
+  useEffect(() => {
+    applesOnTheTree < numberOfApplesFalling && setIsThereAnyApplesLeft(false);
+  }, [numberOfApplesFalling]);
+
   return (
     <Wrapper>
       {/* numberOfApples state passed to styled component as number prop. */}
       <AppleContainer
         className={isShaken ? "apple-container shaken" : "apple-container"}
-        number={numberOfApples}
+        number={numberOfApplesFalling}
       >
-       <Apple/>
+        <Apple />
       </AppleContainer>
       {/* Same prop will be used in Basket Component's apples. */}
-      <Basket number={numberOfApples}/>
+      <Basket number={numberOfApplesFalling} />
+      <div className={isThereAnyApplesLeft ? "hide" : "show"}>
+        <p>There is no apple left. You hungry monster!</p>
+        <button className="restart" onClick={() => window.location.reload()}>Restart the game.</button>
+      </div>
     </Wrapper>
   );
 };
